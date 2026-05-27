@@ -1,0 +1,16 @@
+# Build artefacts
+*.zip
+*.crx
+*.pem
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Node (if build tools are added later)
+node_modules/
