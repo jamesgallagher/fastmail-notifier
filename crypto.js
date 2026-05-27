@@ -136,7 +136,6 @@ export function isEncrypted(value) {
 
 const SENSITIVE_FIELDS = new Set([
   "accessToken",
-  "refreshToken",
 ]);
 
 /**

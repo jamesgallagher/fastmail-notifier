@@ -1,20 +1,22 @@
 // ── Fastmail Notifier — Popup Script ────────────────────────
 
-const loginBtn = document.getElementById("login-btn");
-const signOutBtn = document.getElementById("sign-out-btn");
-const refreshBtn = document.getElementById("refresh-btn");
-const unreadCount = document.getElementById("unread-count");
-const unreadLabel = document.getElementById("unread-label");
-const lastChecked = document.getElementById("last-checked");
-const errorBanner = document.getElementById("error-banner");
-const loginError = document.getElementById("login-error");
-const badgeDot = document.getElementById("badge-dot");
+const tokenInput      = document.getElementById("token-input");
+const toggleVis       = document.getElementById("toggle-visibility");
+const saveBtn         = document.getElementById("save-btn");
+const signOutBtn      = document.getElementById("sign-out-btn");
+const refreshBtn      = document.getElementById("refresh-btn");
+const unreadCount     = document.getElementById("unread-count");
+const unreadLabel     = document.getElementById("unread-label");
+const lastChecked     = document.getElementById("last-checked");
+const errorBanner     = document.getElementById("error-banner");
+const setupError      = document.getElementById("setup-error");
+const badgeDot        = document.getElementById("badge-dot");
 
 // ── Helpers ───────────────────────────────────────────────────
 
-function sendMessage(type) {
+function sendMessage(type, extra = {}) {
   return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage({ type }, (resp) => {
+    chrome.runtime.sendMessage({ type, ...extra }, (resp) => {
       if (chrome.runtime.lastError) {
         reject(new Error(chrome.runtime.lastError.message));
       } else {
@@ -33,7 +35,7 @@ function formatLastChecked(ts) {
   return new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-// ── Render state ──────────────────────────────────────────────
+// ── Render ────────────────────────────────────────────────────
 
 function renderAuthenticated(status) {
   document.body.classList.add("authenticated");
@@ -59,12 +61,13 @@ function renderAuthenticated(status) {
   }
 }
 
-function renderUnauthenticated() {
+function renderSetup() {
   document.body.classList.remove("authenticated");
-  loginError.classList.remove("visible");
+  tokenInput.value = "";
+  setupError.classList.remove("visible");
 }
 
-// ── Load status on open ───────────────────────────────────────
+// ── Init ──────────────────────────────────────────────────────
 
 async function init() {
   try {
@@ -72,50 +75,61 @@ async function init() {
     if (status.isAuthenticated) {
       renderAuthenticated(status);
     } else {
-      renderUnauthenticated();
+      renderSetup();
     }
   } catch (err) {
     console.error("Popup init error:", err);
   }
 }
 
-// ── Login button ──────────────────────────────────────────────
+// ── Show/hide token ───────────────────────────────────────────
 
-loginBtn.addEventListener("click", async () => {
-  loginBtn.disabled = true;
-  loginBtn.innerHTML = `<span class="loading-spinner"></span> Signing in…`;
-  loginError.classList.remove("visible");
+toggleVis.addEventListener("click", () => {
+  const isPassword = tokenInput.type === "password";
+  tokenInput.type = isPassword ? "text" : "password";
+  // Swap eye icon
+  document.getElementById("eye-icon").innerHTML = isPassword
+    ? `<path d="M1 1l13 13M6.5 5.5A2.5 2.5 0 0110 9M4 4C2 5.5 1 7.5 1 7.5s3 4.5 6.5 4.5c1.2 0 2.3-.3 3.3-.9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M10.5 10.5C9.5 11.8 8.5 12 7.5 12 4 12 1 7.5 1 7.5s.8-1.5 2.5-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`
+    : `<path d="M7.5 3C4 3 1 7.5 1 7.5s3 4.5 6.5 4.5S14 7.5 14 7.5 11 3 7.5 3z" stroke="currentColor" stroke-width="1.2"/><circle cx="7.5" cy="7.5" r="1.8" stroke="currentColor" stroke-width="1.2"/>`;
+});
+
+// ── Save token ────────────────────────────────────────────────
+
+saveBtn.addEventListener("click", async () => {
+  const token = tokenInput.value.trim();
+  if (!token) {
+    setupError.textContent = "Please paste your API token first.";
+    setupError.classList.add("visible");
+    return;
+  }
+
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = `<span class="loading-spinner"></span> Verifying…`;
+  setupError.classList.remove("visible");
 
   try {
-    const result = await sendMessage("START_AUTH");
+    const result = await sendMessage("SAVE_TOKEN", { token });
     if (result.success) {
       const status = await sendMessage("GET_STATUS");
       renderAuthenticated(status);
     } else {
-      loginError.textContent = result.error || "Authentication failed. Please try again.";
-      loginError.classList.add("visible");
+      setupError.textContent = result.error || "Could not connect. Please check your token.";
+      setupError.classList.add("visible");
     }
   } catch (err) {
-    loginError.textContent = err.message || "Something went wrong.";
-    loginError.classList.add("visible");
+    setupError.textContent = err.message || "Something went wrong.";
+    setupError.classList.add("visible");
   } finally {
-    loginBtn.disabled = false;
-    loginBtn.innerHTML = `
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" fill="white" fill-opacity="0.2"/>
-        <path d="M2 4l6 5 6-5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="2" y="4" width="12" height="8" rx="1" stroke="white" stroke-width="1.4" fill="none"/>
-      </svg>
-      Sign in with Fastmail`;
+    saveBtn.disabled = false;
+    saveBtn.textContent = "Connect to Fastmail";
   }
 });
 
-// ── Refresh button ────────────────────────────────────────────
+// ── Refresh ───────────────────────────────────────────────────
 
 refreshBtn.addEventListener("click", async () => {
   refreshBtn.classList.add("spinning");
   lastChecked.textContent = "Checking…";
-
   try {
     await sendMessage("POLL_NOW");
     const status = await sendMessage("GET_STATUS");
@@ -128,24 +142,23 @@ refreshBtn.addEventListener("click", async () => {
   }
 });
 
-// ── Sign out button ───────────────────────────────────────────
+// ── Remove token ──────────────────────────────────────────────
 
 signOutBtn.addEventListener("click", async () => {
-  signOutBtn.textContent = "Signing out…";
+  signOutBtn.textContent = "Removing…";
   signOutBtn.disabled = true;
-
   try {
     await sendMessage("SIGN_OUT");
-    renderUnauthenticated();
+    renderSetup();
   } catch (err) {
-    console.error("Sign out error:", err);
+    console.error("Remove token error:", err);
   } finally {
     signOutBtn.disabled = false;
-    signOutBtn.textContent = "Sign out of Fastmail";
+    signOutBtn.textContent = "Remove API token";
   }
 });
 
-// ── Refresh last-checked time every 10s while popup is open ──
+// ── Keep last-checked fresh ───────────────────────────────────
 
 setInterval(async () => {
   if (document.body.classList.contains("authenticated")) {

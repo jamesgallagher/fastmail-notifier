@@ -10,16 +10,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --fm-navy:    #1a2236;
-      --fm-blue:    #0072c6;
-      --fm-light:   #e8f0fe;
-      --fm-red:     #e8334a;
-      --fm-green:   #1fa853;
-      --fm-muted:   #7a8499;
-      --fm-border:  #dde3ee;
-      --fm-bg:      #f5f7fc;
-      --fm-white:   #ffffff;
-      --radius:     10px;
+      --fm-navy:   #1a2236;
+      --fm-blue:   #0072c6;
+      --fm-light:  #e8f0fe;
+      --fm-red:    #e8334a;
+      --fm-muted:  #7a8499;
+      --fm-border: #dde3ee;
+      --fm-bg:     #f5f7fc;
+      --fm-white:  #ffffff;
+      --radius:    10px;
     }
 
     body {
@@ -38,39 +37,23 @@
       align-items: center;
       gap: 10px;
     }
-
-    .header-logo {
-      width: 28px;
-      height: 28px;
-    }
-
+    .header-logo { width: 28px; height: 28px; }
     .header-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.2px;
-      flex: 1;
+      font-size: 15px; font-weight: 600;
+      color: #fff; letter-spacing: -0.2px; flex: 1;
     }
-
     .header-open-btn {
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
-      color: #fff;
-      font-size: 11px;
-      font-family: inherit;
-      font-weight: 500;
-      padding: 4px 8px;
-      cursor: pointer;
-      transition: background 0.15s;
-      text-decoration: none;
+      border-radius: 6px; color: #fff;
+      font-size: 11px; font-family: inherit; font-weight: 500;
+      padding: 4px 8px; cursor: pointer;
+      transition: background 0.15s; text-decoration: none;
     }
     .header-open-btn:hover { background: rgba(255,255,255,0.2); }
 
-    /* ── Main content ── */
-    .content {
-      padding: 16px;
-    }
+    /* ── Content ── */
+    .content { padding: 16px; }
 
     /* ── Unread card ── */
     .unread-card {
@@ -78,193 +61,128 @@
       border: 1px solid var(--fm-border);
       border-radius: var(--radius);
       padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      display: flex; align-items: center; gap: 14px;
       margin-bottom: 12px;
     }
-
     .envelope-wrap {
-      position: relative;
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
+      position: relative; width: 44px; height: 44px; flex-shrink: 0;
     }
-
-    .envelope-wrap svg {
-      width: 44px;
-      height: 44px;
-    }
-
+    .envelope-wrap svg { width: 44px; height: 44px; }
     .unread-badge {
-      position: absolute;
-      top: -5px;
-      right: -6px;
-      background: var(--fm-red);
-      color: #fff;
-      border-radius: 10px;
-      font-size: 10px;
-      font-weight: 600;
-      min-width: 18px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 4px;
-      border: 2px solid var(--fm-white);
-      line-height: 1;
+      position: absolute; top: -5px; right: -6px;
+      background: var(--fm-red); color: #fff;
+      border-radius: 10px; font-size: 10px; font-weight: 600;
+      min-width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 4px; border: 2px solid var(--fm-white); line-height: 1;
     }
-
     .unread-badge.hidden { display: none; }
-
     .unread-info { flex: 1; }
-
     .unread-count {
-      font-size: 26px;
-      font-weight: 600;
-      line-height: 1;
-      color: var(--fm-navy);
-      letter-spacing: -1px;
+      font-size: 26px; font-weight: 600;
+      line-height: 1; color: var(--fm-navy); letter-spacing: -1px;
     }
+    .unread-label { font-size: 12px; color: var(--fm-muted); margin-top: 2px; }
 
-    .unread-label {
-      font-size: 12px;
-      color: var(--fm-muted);
-      margin-top: 2px;
-    }
-
-    /* ── Last checked ── */
+    /* ── Meta row ── */
     .meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 12px;
     }
-
-    .last-checked {
-      font-size: 11px;
-      color: var(--fm-muted);
-    }
-
+    .last-checked { font-size: 11px; color: var(--fm-muted); }
     .refresh-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
+      background: none; border: none; cursor: pointer;
       color: var(--fm-blue);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-family: inherit;
-      font-weight: 500;
-      padding: 2px 4px;
-      border-radius: 4px;
-      transition: background 0.15s;
+      display: flex; align-items: center; gap: 4px;
+      font-size: 11px; font-family: inherit; font-weight: 500;
+      padding: 2px 4px; border-radius: 4px; transition: background 0.15s;
     }
     .refresh-btn:hover { background: var(--fm-light); }
     .refresh-btn svg { transition: transform 0.5s; }
     .refresh-btn.spinning svg { transform: rotate(360deg); }
 
-    /* ── Error state ── */
+    /* ── Error banner ── */
     .error-banner {
-      background: #fff3f5;
-      border: 1px solid #fcc;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 12px;
-      color: #c0392b;
-      margin-bottom: 12px;
-      display: none;
+      background: #fff3f5; border: 1px solid #fcc;
+      border-radius: 8px; padding: 10px 12px;
+      font-size: 12px; color: #c0392b;
+      margin-bottom: 12px; display: none;
     }
     .error-banner.visible { display: block; }
 
-    /* ── Sign out button ── */
+    /* ── Sign out ── */
     .sign-out-btn {
-      width: 100%;
-      padding: 9px;
-      background: none;
-      border: 1px solid var(--fm-border);
-      border-radius: 8px;
-      color: var(--fm-muted);
-      font-size: 12px;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.15s;
+      width: 100%; padding: 9px;
+      background: none; border: 1px solid var(--fm-border);
+      border-radius: 8px; color: var(--fm-muted);
+      font-size: 12px; font-family: inherit;
+      cursor: pointer; transition: all 0.15s;
     }
-    .sign-out-btn:hover {
-      border-color: var(--fm-red);
-      color: var(--fm-red);
-    }
+    .sign-out-btn:hover { border-color: var(--fm-red); color: var(--fm-red); }
 
-    /* ── Login view ── */
-    .login-view {
-      text-align: center;
-      padding: 24px 16px;
+    /* ── Setup view ── */
+    .setup-view { padding: 20px 16px 16px; }
+    .setup-icon { width: 48px; height: 48px; margin: 0 auto 12px; display: block; }
+    .setup-title {
+      font-size: 15px; font-weight: 600;
+      color: var(--fm-navy); margin-bottom: 6px; text-align: center;
     }
-
-    .login-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 14px;
+    .setup-desc {
+      font-size: 12px; color: var(--fm-muted);
+      margin-bottom: 16px; line-height: 1.55; text-align: center;
     }
+    .setup-desc a { color: var(--fm-blue); text-decoration: none; }
+    .setup-desc a:hover { text-decoration: underline; }
 
-    .login-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--fm-navy);
-      margin-bottom: 6px;
+    .token-field-wrap { position: relative; margin-bottom: 10px; }
+    .token-input {
+      width: 100%; padding: 10px 36px 10px 12px;
+      border: 1px solid var(--fm-border); border-radius: 8px;
+      font-size: 12px; font-family: inherit; color: var(--fm-navy);
+      background: var(--fm-white);
+      transition: border-color 0.15s;
+      outline: none;
     }
+    .token-input:focus { border-color: var(--fm-blue); }
+    .token-input::placeholder { color: #b0b8cc; }
 
-    .login-desc {
-      font-size: 12px;
-      color: var(--fm-muted);
-      margin-bottom: 20px;
-      line-height: 1.5;
+    .toggle-visibility {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: var(--fm-muted); padding: 2px; line-height: 1;
     }
+    .toggle-visibility:hover { color: var(--fm-navy); }
 
-    .login-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--fm-blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 11px 22px;
-      font-size: 13px;
-      font-family: inherit;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
+    .save-btn {
+      width: 100%; padding: 10px;
+      background: var(--fm-blue); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 13px; font-family: inherit; font-weight: 500;
+      cursor: pointer; transition: background 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .login-btn:hover { background: #005fa3; }
-    .login-btn:active { transform: scale(0.98); }
-    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .save-btn:hover { background: #005fa3; }
+    .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    /* ── Loading state ── */
+    /* ── Spinner ── */
     .loading-spinner {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
+      display: inline-block; width: 13px; height: 13px;
       border: 2px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
+      border-top-color: #fff; border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── View switching ── */
     #logged-in-view { display: none; }
-    #login-view { display: block; }
-
+    #setup-view { display: block; }
     body.authenticated #logged-in-view { display: block; }
-    body.authenticated #login-view { display: none; }
+    body.authenticated #setup-view { display: none; }
   </style>
 </head>
 <body>
 
-  <!-- Header (always visible) -->
+  <!-- Header -->
   <div class="header">
     <svg class="header-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="28" height="28" rx="6" fill="#0072c6"/>
@@ -280,7 +198,6 @@
   <div id="logged-in-view" class="content">
     <div class="unread-card">
       <div class="envelope-wrap">
-        <!-- Envelope SVG -->
         <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="44" height="44" rx="10" fill="#e8f0fe"/>
           <path d="M9 15a2 2 0 012-2h22a2 2 0 012 2v14a2 2 0 01-2 2H11a2 2 0 01-2-2V15z" fill="#0072c6" fill-opacity="0.12"/>
@@ -307,29 +224,43 @@
     </div>
 
     <div class="error-banner" id="error-banner"></div>
-
-    <button class="sign-out-btn" id="sign-out-btn">Sign out of Fastmail</button>
+    <button class="sign-out-btn" id="sign-out-btn">Remove API token</button>
   </div>
 
-  <!-- Login view -->
-  <div id="login-view" class="login-view">
-    <svg class="login-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="56" height="56" rx="14" fill="#e8f0fe"/>
-      <path d="M12 22a3 3 0 013-3h26a3 3 0 013 3v14a3 3 0 01-3 3H15a3 3 0 01-3-3V22z" fill="#0072c6" fill-opacity="0.12"/>
-      <path d="M12 22l16 12 16-12" stroke="#0072c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="12" y="22" width="32" height="17" rx="2.5" stroke="#0072c6" stroke-width="2" fill="none"/>
+  <!-- Setup view -->
+  <div id="setup-view" class="setup-view">
+    <svg class="setup-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="48" height="48" rx="12" fill="#e8f0fe"/>
+      <path d="M10 19a2.5 2.5 0 012.5-2.5h23A2.5 2.5 0 0138 19v12a2.5 2.5 0 01-2.5 2.5h-23A2.5 2.5 0 0110 31V19z" fill="#0072c6" fill-opacity="0.1"/>
+      <path d="M10 19l14 10.5L38 19" stroke="#0072c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="10" y="19" width="28" height="14.5" rx="2" stroke="#0072c6" stroke-width="2" fill="none"/>
     </svg>
-    <div class="login-title">Connect to Fastmail</div>
-    <div class="login-desc">Sign in with your Fastmail account to see unread message counts. 2FA is fully supported.</div>
-    <button class="login-btn" id="login-btn">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" fill="white" fill-opacity="0.2"/>
-        <path d="M2 4l6 5 6-5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="2" y="4" width="12" height="8" rx="1" stroke="white" stroke-width="1.4" fill="none"/>
-      </svg>
-      Sign in with Fastmail
-    </button>
-    <div class="error-banner" id="login-error" style="margin-top:14px; text-align:left;"></div>
+    <div class="setup-title">Add your API token</div>
+    <div class="setup-desc">
+      Generate a token in Fastmail under<br>
+      <a href="https://app.fastmail.com/settings/security/tokens/new" target="_blank">Settings → Privacy &amp; Security → API tokens</a>.
+      <br><br>The token is encrypted before being stored — it is never saved in plain text.
+    </div>
+
+    <div class="token-field-wrap">
+      <input
+        class="token-input"
+        id="token-input"
+        type="password"
+        placeholder="Paste your API token here"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button class="toggle-visibility" id="toggle-visibility" title="Show/hide token">
+        <svg id="eye-icon" width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M7.5 3C4 3 1 7.5 1 7.5s3 4.5 6.5 4.5S14 7.5 14 7.5 11 3 7.5 3z" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="7.5" cy="7.5" r="1.8" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="save-btn" id="save-btn">Connect to Fastmail</button>
+    <div class="error-banner" id="setup-error" style="margin-top:10px;"></div>
   </div>
 
   <script src="popup.js"></script>
