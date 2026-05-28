@@ -18,6 +18,8 @@
       --fm-border: #dde3ee;
       --fm-bg:     #f5f7fc;
       --fm-white:  #ffffff;
+      --fm-green:  #1a8a4a;
+      --fm-green-bg: #edf7f1;
       --radius:    10px;
     }
 
@@ -26,7 +28,6 @@
       width: 300px;
       background: var(--fm-bg);
       color: var(--fm-navy);
-      min-height: 180px;
     }
 
     /* ── Header ── */
@@ -52,87 +53,71 @@
     }
     .header-open-btn:hover { background: rgba(255,255,255,0.2); }
 
-    /* ── Content ── */
-    .content { padding: 16px; }
-
-    /* ── Unread card ── */
-    .unread-card {
-      background: var(--fm-white);
-      border: 1px solid var(--fm-border);
-      border-radius: var(--radius);
-      padding: 16px;
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 12px;
-    }
-    .envelope-wrap {
-      position: relative; width: 44px; height: 44px; flex-shrink: 0;
-    }
-    .envelope-wrap svg { width: 44px; height: 44px; }
-    .unread-badge {
-      position: absolute; top: -5px; right: -6px;
-      background: var(--fm-red); color: #fff;
-      border-radius: 10px; font-size: 10px; font-weight: 600;
-      min-width: 18px; height: 18px;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 4px; border: 2px solid var(--fm-white); line-height: 1;
-    }
-    .unread-badge.hidden { display: none; }
-    .unread-info { flex: 1; }
-    .unread-count {
-      font-size: 26px; font-weight: 600;
-      line-height: 1; color: var(--fm-navy); letter-spacing: -1px;
-    }
-    .unread-label { font-size: 12px; color: var(--fm-muted); margin-top: 2px; }
-
-    /* ── Meta row ── */
-    .meta-row {
-      display: flex; align-items: center;
-      justify-content: space-between; margin-bottom: 12px;
-    }
-    .last-checked { font-size: 11px; color: var(--fm-muted); }
-    .refresh-btn {
-      background: none; border: none; cursor: pointer;
-      color: var(--fm-blue);
-      display: flex; align-items: center; gap: 4px;
-      font-size: 11px; font-family: inherit; font-weight: 500;
-      padding: 2px 4px; border-radius: 4px; transition: background 0.15s;
-    }
-    .refresh-btn:hover { background: var(--fm-light); }
-    .refresh-btn svg { transition: transform 0.5s; }
-    .refresh-btn.spinning svg { transform: rotate(360deg); }
-
-    /* ── Error banner ── */
-    .error-banner {
-      background: #fff3f5; border: 1px solid #fcc;
-      border-radius: 8px; padding: 10px 12px;
-      font-size: 12px; color: #c0392b;
-      margin-bottom: 12px; display: none;
-    }
-    .error-banner.visible { display: block; }
-
-    /* ── Sign out ── */
-    .sign-out-btn {
-      width: 100%; padding: 9px;
-      background: none; border: 1px solid var(--fm-border);
-      border-radius: 8px; color: var(--fm-muted);
-      font-size: 12px; font-family: inherit;
-      cursor: pointer; transition: all 0.15s;
-    }
-    .sign-out-btn:hover { border-color: var(--fm-red); color: var(--fm-red); }
-
     /* ── Setup view ── */
     .setup-view { padding: 20px 16px 16px; }
     .setup-icon { width: 48px; height: 48px; margin: 0 auto 12px; display: block; }
     .setup-title {
       font-size: 15px; font-weight: 600;
-      color: var(--fm-navy); margin-bottom: 6px; text-align: center;
+      color: var(--fm-navy); margin-bottom: 10px; text-align: center;
     }
+
+    /* ── Scope callout ── */
+    .scope-callout {
+      background: var(--fm-green-bg);
+      border: 1px solid #b6dfc8;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .scope-callout-icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--fm-green);
+    }
+    .scope-callout-text {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #16663a;
+    }
+    .scope-callout-text strong { font-weight: 600; }
+
     .setup-desc {
       font-size: 12px; color: var(--fm-muted);
-      margin-bottom: 16px; line-height: 1.55; text-align: center;
+      margin-bottom: 14px; line-height: 1.55; text-align: center;
     }
     .setup-desc a { color: var(--fm-blue); text-decoration: none; }
     .setup-desc a:hover { text-decoration: underline; }
+
+    /* ── Token steps ── */
+    .setup-steps {
+      background: var(--fm-white);
+      border: 1px solid var(--fm-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      font-size: 11.5px;
+      color: var(--fm-muted);
+      line-height: 1.6;
+    }
+    .setup-steps ol {
+      padding-left: 16px;
+      margin: 0;
+    }
+    .setup-steps li { margin-bottom: 2px; }
+    .setup-steps a { color: var(--fm-blue); text-decoration: none; }
+    .setup-steps a:hover { text-decoration: underline; }
+    .setup-steps .scope-hint {
+      display: inline-block;
+      background: var(--fm-light);
+      color: var(--fm-blue);
+      font-weight: 600;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 11px;
+    }
 
     .token-field-wrap { position: relative; margin-bottom: 10px; }
     .token-input {
@@ -164,6 +149,15 @@
     .save-btn:hover { background: #005fa3; }
     .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+    /* ── Error banner ── */
+    .error-banner {
+      background: #fff3f5; border: 1px solid #fcc;
+      border-radius: 8px; padding: 10px 12px;
+      font-size: 12px; color: #c0392b;
+      margin-top: 10px; display: none;
+    }
+    .error-banner.visible { display: block; }
+
     /* ── Spinner ── */
     .loading-spinner {
       display: inline-block; width: 13px; height: 13px;
@@ -172,12 +166,6 @@
       animation: spin 0.7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── View switching ── */
-    #logged-in-view { display: none; }
-    #setup-view { display: block; }
-    body.authenticated #logged-in-view { display: block; }
-    body.authenticated #setup-view { display: none; }
   </style>
 </head>
 <body>
@@ -194,52 +182,38 @@
     <a href="https://app.fastmail.com" target="_blank" class="header-open-btn">Open ↗</a>
   </div>
 
-  <!-- Logged-in view -->
-  <div id="logged-in-view" class="content">
-    <div class="unread-card">
-      <div class="envelope-wrap">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="44" height="44" rx="10" fill="#e8f0fe"/>
-          <path d="M9 15a2 2 0 012-2h22a2 2 0 012 2v14a2 2 0 01-2 2H11a2 2 0 01-2-2V15z" fill="#0072c6" fill-opacity="0.12"/>
-          <path d="M9 15l13 10 13-10" stroke="#0072c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="9" y="15" width="26" height="16" rx="2" stroke="#0072c6" stroke-width="1.8" fill="none"/>
-        </svg>
-        <div class="unread-badge hidden" id="badge-dot"></div>
-      </div>
-      <div class="unread-info">
-        <div class="unread-count" id="unread-count">—</div>
-        <div class="unread-label" id="unread-label">unread messages</div>
-      </div>
-    </div>
-
-    <div class="meta-row">
-      <span class="last-checked" id="last-checked">Checking…</span>
-      <button class="refresh-btn" id="refresh-btn">
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-          <path d="M10 5.5A4.5 4.5 0 111 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M10 2.5v3h-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Refresh
-      </button>
-    </div>
-
-    <div class="error-banner" id="error-banner"></div>
-    <button class="sign-out-btn" id="sign-out-btn">Remove API token</button>
-  </div>
-
   <!-- Setup view -->
-  <div id="setup-view" class="setup-view">
+  <div class="setup-view">
+
     <svg class="setup-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="48" height="48" rx="12" fill="#e8f0fe"/>
       <path d="M10 19a2.5 2.5 0 012.5-2.5h23A2.5 2.5 0 0138 19v12a2.5 2.5 0 01-2.5 2.5h-23A2.5 2.5 0 0110 31V19z" fill="#0072c6" fill-opacity="0.1"/>
       <path d="M10 19l14 10.5L38 19" stroke="#0072c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <rect x="10" y="19" width="28" height="14.5" rx="2" stroke="#0072c6" stroke-width="2" fill="none"/>
     </svg>
-    <div class="setup-title">Add your API token</div>
-    <div class="setup-desc">
-      Generate a token in Fastmail under<br>
-      <a href="https://app.fastmail.com/settings/security/tokens/new" target="_blank">Settings → Privacy &amp; Security → API tokens</a>.
-      <br><br>The token is encrypted before being stored — it is never saved in plain text.
+
+    <div class="setup-title">Connect to Fastmail</div>
+
+    <!-- Read-only scope callout -->
+    <div class="scope-callout">
+      <svg class="scope-callout-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="6.25" stroke="#1a8a4a" stroke-width="1.3"/>
+        <path d="M4.5 7l2 2 3-3" stroke="#1a8a4a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="scope-callout-text">
+        Use a <strong>read-only</strong> token — select <strong>Mail — Read</strong> access only.
+        This extension never sends, deletes, or modifies any mail.
+      </span>
+    </div>
+
+    <!-- Step-by-step instructions -->
+    <div class="setup-steps">
+      <ol>
+        <li>Go to <a href="https://app.fastmail.com/settings/security/tokens/new" target="_blank">Fastmail → Settings → API tokens</a></li>
+        <li>Click <strong>New token</strong> and give it a name</li>
+        <li>Under permissions, enable only <span class="scope-hint">Mail — Read</span></li>
+        <li>Copy the token (shown once) and paste it below</li>
+      </ol>
     </div>
 
     <div class="token-field-wrap">
@@ -260,7 +234,12 @@
     </div>
 
     <button class="save-btn" id="save-btn">Connect to Fastmail</button>
-    <div class="error-banner" id="setup-error" style="margin-top:10px;"></div>
+    <div class="error-banner" id="setup-error"></div>
+
+    <p style="font-size:11px;color:var(--fm-muted);text-align:center;margin-top:12px;line-height:1.5;">
+      Your token is encrypted before being stored — it is never saved in plain text.
+    </p>
+
   </div>
 
   <script src="popup.js"></script>
